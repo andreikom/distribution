@@ -13,6 +13,7 @@ import (
 	"github.com/docker/distribution/registry/client"
 	"github.com/docker/distribution/registry/client/auth/challenge"
 	"github.com/docker/distribution/registry/client/transport"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -321,6 +322,7 @@ type postTokenResponse struct {
 }
 
 func (th *tokenHandler) fetchTokenWithOAuth(realm *url.URL, refreshToken, service string, scopes []string) (token string, expiration time.Time, err error) {
+	logrus.Info("Entering fetchTokenWithOAuth")
 	form := url.Values{}
 	form.Set("scope", strings.Join(scopes, " "))
 	form.Set("service", service)
