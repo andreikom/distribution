@@ -399,7 +399,7 @@ type getTokenResponse struct {
 }
 
 func (th *tokenHandler) fetchTokenWithBasicAuth(realm *url.URL, service string, scopes []string) (token string, expiration time.Time, err error) {
-
+	logrus.Info("Entering fetchTokenWithBasicAuth")
 	req, err := http.NewRequest("GET", realm.String(), nil)
 	if err != nil {
 		return "", time.Time{}, err
@@ -482,6 +482,7 @@ func (th *tokenHandler) fetchTokenWithBasicAuth(realm *url.URL, service string, 
 }
 
 func (th *tokenHandler) fetchToken(params map[string]string, scopes []string) (token string, expiration time.Time, err error) {
+	logrus.Info("Entering fetchToken")
 	realm, ok := params["realm"]
 	if !ok {
 		return "", time.Time{}, errors.New("no realm specified for token auth challenge")
